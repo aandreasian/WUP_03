@@ -18,7 +18,7 @@ davisdata <- read.csv(file="UCDavis.csv")
 ## you choose to sit in??
 
 $H_0$ there is no difference in alcohol consumption based on where one sits in class.
-$H_A$ There is a difference in alcohol consumption
+$H_A$ There is a difference in alcohol consumption based on where one sits in class.
 
 ## Now with ggplot - first select the basic data
 
@@ -29,8 +29,9 @@ basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
 
 ```{r}
 basicCN + geom_boxplot()
-```
-  The box plot shows 
+```             
+
+The box plot shows that the people in the back tend to consume more alcohole than the people that sit in the front.
   
 ### get fancy  
 
@@ -38,6 +39,8 @@ basicCN + geom_boxplot()
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
+people in the back tend to consume more alcohole than the people that sit in the front.
+ 
 ## Numerical Summarys 
 
 ```{r}
@@ -51,6 +54,15 @@ model1 <- aov(alcohol~Seat,data=davisdata)
 summary.aov(model1)
 ```
 
+```{r}
+plot(TukeyHSD(model1))
+```
+
+First of all we got p- values of 0.000116  so we conclude we reject $H_0$; there is a difference in alcohol consumption based on where one sits.
+
+
 ## Conclusions
+
+In conclusion the people who sit in the back consume more alcohol there is a slight difference in alcohol consumption than the people who sit in the middle front and the back.
 
 
